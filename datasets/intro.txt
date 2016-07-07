@@ -1,0 +1,40 @@
+* DBSherlock Datasets
+
+- Terms of use
+
+Please cite the following papers if you use any part of this dataset:
+
+@inproceedings{sigmod/YoonNM16,
+  author    = {Dong Young Yoon and
+               Ning Niu and
+               Barzan Mozafari},
+  title     = {DBSherlock: {A} Performance Diagnostic Tool for Transactional Databases},
+  booktitle = {Proceedings of the 2016 {ACM} {SIGMOD} International Conference on
+               Management of Data, San Francisco, USA, June 26 - July 1, 2016},
+  year      = {2016}
+}
+
+@article{DBLP:journals/pvldb/YoonMB15,
+  author    = {Dong Young Yoon and
+               Barzan Mozafari and
+               Douglas P. Brown},
+  title     = {DBSeer: Pain-free Database Administration through Workload Intelligence},
+  journal   = {{PVLDB}},
+  volume    = {8},
+  number    = {12},
+  pages     = {2036--2039},
+  year      = {2015},
+  url       = {http://www.vldb.org/pvldb/vol8/p2036-yoon.pdf},
+  timestamp = {Mon, 30 May 2016 12:01:10 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/journals/pvldb/YoonMB15},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+- Questions
+
+For all inquiries please contact dyoon AT umich.edu
+
+- Datasets
+
+Datasets are available as MAT-files, which can be loaded in MATLAB.
+The format of each dataset is provided in the README file.
