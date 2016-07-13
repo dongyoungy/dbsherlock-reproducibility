@@ -1,4 +1,4 @@
-function [confidence fscore] = perform_evaluation_causal_models(dataset_name, num_discrete, diff_threshold, abnormal_multiplier, num_train_samples, batch_count)
+function [confidence fscore] = perform_evaluation_causal_models_with_domain_knowledge(dataset_name, num_discrete, diff_threshold, abnormal_multiplier, num_train_samples, batch_count)
 
   data = load(['datasets/' dataset_name]);
   model_directory = [pwd '/causal_models'];
@@ -25,6 +25,7 @@ function [confidence fscore] = perform_evaluation_causal_models(dataset_name, nu
   train_param = ExperimentParameter;
   test_param = ExperimentParameter;
   train_param.create_model = true;
+  train_param.domain_knowledge = generate_domain_knowledge(data);
 
   if ~isempty(num_discrete)
     train_param.num_discrete = num_discrete;

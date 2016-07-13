@@ -1,10 +1,11 @@
-function [confidence fscore] = perform_evaluation_causal_models(dataset_name, num_discrete, diff_threshold, abnormal_multiplier, num_train_samples, batch_count)
+function [confidence fscore] = perform_evaluation_compound_cases(dataset_name, num_discrete, diff_threshold, abnormal_multiplier)
 
   data = load(['datasets/' dataset_name]);
   model_directory = [pwd '/causal_models'];
   mkdir(model_directory);
 
   num_case = size(data.test_datasets, 1);
+  num_compound_case = size(data.compound_datasets, 1);
   num_samples = size(data.test_datasets, 2);
 
   confidence = cell(num_case, num_case);
@@ -39,19 +40,10 @@ function [confidence fscore] = perform_evaluation_causal_models(dataset_name, nu
     test_param.abnormal_multiplier = abnormal_multiplier;
   end
 
-  if num_train_samples == 1
-    batch_count=num_samples;
-  end
-
-  for batch=1:batch_count
+  for batch=1:1
 
     samples = [1:num_samples];
-    if num_train_samples == 1
-      train_samples = batch;
-    else
-      train_samples = datasample(samples, num_train_samples, 'Replace', false);
-    end
-    samples(ismember(samples,train_samples)) = [];
+    train_samples = samples;
     test_samples = samples;
 
     clearCausalModels(model_directory);
@@ -67,11 +59,11 @@ function [confidence fscore] = perform_evaluation_causal_models(dataset_name, nu
     end
 
     % calculate confidence
-    for i=1:num_case
+    for i=1:num_compound_case
       for j=1:size(test_samples,2)
         test_idx = test_samples(j);
 
-        explanation = run_dbsherlock(data.test_datasets{i,test_idx}, data.abnormal_regions{i,test_idx}, data.normal_regions{i,test_idx}, [], test_param);
+        explanation = run_dbsherlock(data.compound_datasets{i,test_idx}, data.abnormal_regions_compound{i,test_idx}, data.normal_regions_compound{i,test_idx}, [], test_param);
         for k=1:num_case
           c2 = k;
           compare = strcmp(explanation, causes{c2});
