@@ -1,10 +1,13 @@
-function [moc fscore] = reproduce_cui
+function reproduce_cui
   warning('off', 'all');
   addpath './scripts'
   experiment_prompt = 'Select an experiment to reproduce (1-5 or other input to exit): ';
   dataset_prompt = 'Select an input dataset (1-3 or other input to return): ';
   dataset_name = '';
   compound_dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+  dataset_tpcc_16w = 'dbsherlock_dataset_tpcc_16w.mat';
+  dataset_tpcc_500w = 'dbsherlock_dataset_tpcc_500w.mat';
+  dataset_tpce = 'dbsherlock_dataset_tpce_3000.mat';
 
   while true
     % display experiment options
@@ -15,36 +18,58 @@ function [moc fscore] = reproduce_cui
     fprintf('\t3. Effectiveness of Merged Causal Models (Sec 8.5)\n');
     fprintf('\t4. Effect of Incorporating Domain Knowledge (Sec 8.6)\n');
     fprintf('\t5. Explaining Compound Situations (Sec 8.7)\n');
-    fprintf('\t6. Run all of the above\n');
+    fprintf('\t6. Run all of the above (ETC: 4-5 hours)\n');
     fprintf('\n');
 
     experiment_option = input(experiment_prompt, 's');
     experiment_option = str2num(experiment_option);
-    if isempty(experiment_option) || experiment_option < 1 || experiment_option > 5
+    if isempty(experiment_option) || experiment_option < 1 || experiment_option > 6
       return;
     else
       % choose dataset
-      if experiment_option == 5
+      switch experiment_option
+      case 1
+        fprintf('Using TPC-C (scale factor: 500 warehouses) for the experiment...\n');
+        dataset_name = 'dbsherlock_dataset_tpcc_500w.mat';
+      case 2
         fprintf('Using TPC-C (scale factor: 16 warehouses) for the experiment...\n');
-      else
-        fprintf('\n');
-        fprintf('\t<< Choose an input dataset >>\n');
-        fprintf('\t1. dataset from running normal workload of TPC-C (scale factor: 16 warehouses)\n');
-        fprintf('\t2. dataset from running normal workload of TPC-C (scale factor: 500 warehouses)\n');
-        fprintf('\t3. dataset from running normal workload of TPC-E (scale factor: 3000)\n')
-        fprintf('\n');
-        dataset_option = input(dataset_prompt, 's');
-        switch dataset_option
-        case '1'
-          dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
-        case '2'
-          dataset_name = 'dbsherlock_dataset_tpcc_500w.mat';
-        case '3'
-          dataset_name = 'dbsherlock_dataset_tpce_3000.mat';
-        otherwise
-          continue;
-        end
+        dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+      case 3
+        fprintf('Using TPC-C (scale factor: 500 warehouses) for the experiment...\n');
+        dataset_name = 'dbsherlock_dataset_tpcc_500w.mat';
+      case 4
+        fprintf('Using TPC-C (scale factor: 500 warehouses) for the experiment...\n');
+        dataset_name = 'dbsherlock_dataset_tpcc_500w.mat';
+      case 5
+        fprintf('Using TPC-C (scale factor: 16 warehouses) for the experiment...\n');
+        dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+      case 6
+        dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+      otherwise
       end
+
+      % if experiment_option == 5
+      %   fprintf('Using TPC-C (scale factor: 16 warehouses) for the experiment...\n');
+      %   dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+      % else
+      %   fprintf('\n');
+      %   fprintf('\t<< Choose an input dataset >>\n');
+      %   fprintf('\t1. dataset from running normal workload of TPC-C (scale factor: 16 warehouses)\n');
+      %   fprintf('\t2. dataset from running normal workload of TPC-C (scale factor: 500 warehouses)\n');
+      %   fprintf('\t3. dataset from running normal workload of TPC-E (scale factor: 3000)\n')
+      %   fprintf('\n');
+      %   dataset_option = input(dataset_prompt, 's');
+      %   switch dataset_option
+      %   case '1'
+      %     dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
+      %   case '2'
+      %     dataset_name = 'dbsherlock_dataset_tpcc_500w.mat';
+      %   case '3'
+      %     dataset_name = 'dbsherlock_dataset_tpce_3000.mat';
+      %   otherwise
+      %     continue;
+      %   end
+      % end
 
       data = load(['datasets/' dataset_name]);
       causes = data.causes;
@@ -116,6 +141,7 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_1, 'FontSize', 18);
         legend(axes_exp3_1, 'Single Causal Model (1 Dataset)', 'Merged Causal Models (5 Datasets)');
         title(axes_exp3_1, 'Experiment 3(a) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(a))');
+        set(fig_exp3_1, 'Position', [0 0 1024 768]);
 
         % plot result for figure 8(b)
         [res top_one top_two] = testNumberOfCorrectIdentification(conf_merged_5);
@@ -133,6 +159,7 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_2, 'FontSize', 18);
         legend(axes_exp3_2, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp3_2, 'Experiment 3(b) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(b))');
+        set(fig_exp3_2, 'Position', [30 30 1024 768]);
 
         % plot result for figure 8(c)
         [res top_one_single top_two_single] = testNumberOfCorrectIdentification(conf_single);
@@ -160,6 +187,8 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_3, 'FontSize', 18);
         legend(axes_exp3_3, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp3_3, 'Experiment 3(c) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(c))');
+        set(fig_exp3_2, 'Position', [60 60 1024 768]);
+
       case 4
         conf_without_dm = perform_evaluation_causal_models(dataset_name, 500, 0.2, 10, 1, 1);
         conf_with_dm = perform_evaluation_causal_models_with_domain_knowledge(dataset_name, 500, 0.2, 10, 1, 1);
@@ -183,10 +212,12 @@ function [moc fscore] = reproduce_cui
         set(axes_exp4, 'FontSize', 18);
         legend(axes_exp4, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp4, 'Experiment 4 (Sec 8.6): Effect of Incorporating Domain Knowledge (Table 2)');
+        set(fig_exp4, 'Position', [0 0 1024 768]);
+
       case 5
         [conf_compound fscore_compound] = perform_evaluation_compound_cases(compound_dataset_name, 500, 0.05, 10);
 
-        [res ratio_correct] = testCorrectAnswerForCompoundCase(conf_compound, 3);
+        [res ratio_correct] = testCorrectAnswerForCompoundCases(conf_compound, 3);
         compound_causes = data.compound_causes;
         correct_answers = [4 7 9;3 8 0;3 6 0;3 7 0;3 4 0;3 9 0];
         num_correct_answers = [3 2 2 2 2 2];
@@ -194,7 +225,9 @@ function [moc fscore] = reproduce_cui
         for i=1:6 % # fo compound cases
           fscore_total = 0;
           for j=1:num_correct_answers(i)
-            fscore_total = fscore_total + mean(fscore_compound{correct_answers(j,i), i});
+            fscore = fscore_compound{correct_answers(i,j), i};
+            fscore(isnan(fscore))= 0;
+            fscore_total = fscore_total + mean(fscore);
           end
           fscores(i) = fscore_total / num_correct_answers(i);
         end
@@ -212,19 +245,21 @@ function [moc fscore] = reproduce_cui
         set(axes_exp5, 'FontSize', 18);
         legend(axes_exp5, 'Ratio of Correct Causes if Shown Top-3 Causes', 'Average F1-measure of Correct Causes');
         title(axes_exp5, 'Experiment 5 (Sec 8.7): Explaining Compound Situations (Figure 10)');
+        set(fig_exp5, 'Position', [0 0 1024 768]);
+
       case 6 % run all experiments
         % gather all experiment data first
-        [conf_single fscore_single] = perform_evaluation_causal_models(dataset_name, 500, 0.2, 10, 1, 1);
-        conf_merged_2 = perform_evaluation_causal_models(dataset_name, 500, 0.05, 10, 2, 50);
-        conf_merged_3 = perform_evaluation_causal_models(dataset_name, 500, 0.05, 10, 3, 50);
-        conf_merged_4 = perform_evaluation_causal_models(dataset_name, 500, 0.05, 10, 4, 50);
-        conf_merged_5 = perform_evaluation_causal_models(dataset_name, 500, 0.05, 10, 5, 50);
-        conf_with_dm = perform_evaluation_causal_models_with_domain_knowledge(dataset_name, 500, 0.2, 10, 1, 1);
-        [prec_dbseer recl_dbseer f_dbseer prec_perfxplain recl_perfxplain f_perfxplain] = perform_evaluation_perfxplain(dataset_name, 500, 0.05, 10);
+        [conf_single fscore_single] = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.2, 10, 1, 1);
+        conf_merged_2 = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.05, 10, 2, 50);
+        conf_merged_3 = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.05, 10, 3, 50);
+        conf_merged_4 = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.05, 10, 4, 50);
+        conf_merged_5 = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.05, 10, 5, 50);
+        conf_without_dm = perform_evaluation_causal_models(dataset_tpcc_500w, 500, 0.2, 10, 1, 1);
+        conf_with_dm = perform_evaluation_causal_models_with_domain_knowledge(dataset_tpcc_500w, 500, 0.2, 10, 1, 1);
+        [prec_dbseer recl_dbseer f_dbseer prec_perfxplain recl_perfxplain f_perfxplain] = perform_evaluation_perfxplain(dataset_tpcc_16w, 500, 0.05, 10);
         [conf_compound fscore_compound] = perform_evaluation_compound_cases(compound_dataset_name, 500, 0.05, 10);
 
         hold off;
-
         % Experiment 1
         figure(1);
         moc = calculateMarginOfConfidence(conf_single);
@@ -260,7 +295,7 @@ function [moc fscore] = reproduce_cui
         set(axes_exp2, 'FontSize', 18);
         legend(axes_exp2, 'PerfXplain (Precision)', 'DBSherlock (Precision)', 'PerfXplain (Recall)', 'DBsherlock (Recall)', 'PerfXplain (F1-measure)', 'DBSherlock (F1-measure)');
         title(axes_exp2, 'Experiment 2 (Sec 8.4): DBSherlock Predicates versus PerfXplain');
-        set(fig_exp2, 'Position', [30 30 1024 768]);
+        set(fig_exp2, 'Position', [10 10 1024 768]);
 
         % Experiment 3
         moc_single = calculateMarginOfConfidence(conf_single);
@@ -278,9 +313,17 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_1, 'FontSize', 18);
         legend(axes_exp3_1, 'Single Causal Model (1 Dataset)', 'Merged Causal Models (5 Datasets)');
         title(axes_exp3_1, 'Experiment 3(a) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(a))');
+        set(fig_exp3_1, 'Position', [20 20 1024 768]);
 
         figure(4);
-        [res top_one top_two] = testNumberOfCorrectIdentification(conf_merged_5);
+        num_correct = testNumberOfCorrectIdentification(conf_merged_5);
+        top_one = [];
+        top_two = [];
+        for i=1:size(num_correct,2)
+          result = num_correct{i};
+          top_one(i) = result(1) / result(end);
+          top_two(i) = result(2) / result(end);
+        end
         top_one = top_one * 100; % convert to percentage
         top_two = top_two * 100;
         val = horzcat(top_one', top_two');
@@ -294,6 +337,7 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_2, 'FontSize', 18);
         legend(axes_exp3_2, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp3_2, 'Experiment 3(b) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(b))');
+        set(fig_exp3_2, 'Position', [30 30 1024 768]);
 
         figure(5);
         [res top_one_single top_two_single] = testNumberOfCorrectIdentification(conf_single);
@@ -320,10 +364,10 @@ function [moc fscore] = reproduce_cui
         set(axes_exp3_3, 'FontSize', 18);
         legend(axes_exp3_3, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp3_3, 'Experiment 3(c) (Sec 8.5): Effectiveness of Merged Causal Models (Figure 8(c))');
+        set(fig_exp3_3, 'Position', [40 40 1024 768]);
 
         % Experiment 4
         figure(6);
-        conf_without_dm = conf_single;
         [res top_one_without_dm top_two_without_dm] = testNumberOfCorrectIdentification(conf_without_dm);
         [res top_one_with_dm top_two_with_dm] = testNumberOfCorrectIdentification(conf_with_dm);
         top_ones = vertcat(top_one_without_dm*100, top_one_with_dm*100);
@@ -341,10 +385,11 @@ function [moc fscore] = reproduce_cui
         set(axes_exp4, 'FontSize', 18);
         legend(axes_exp4, 'Top-1 Cause Shown', 'Top-2 Causes Shown');
         title(axes_exp4, 'Experiment 4 (Sec 8.6): Effect of Incorporating Domain Knowledge (Table 2)');
+        set(fig_exp4, 'Position', [50 50 1024 768]);
 
         % Experiment 5
         figure(7);
-        [res ratio_correct] = testCorrectAnswerForCompoundCase(conf_compound, 3);
+        [res ratio_correct] = testCorrectAnswerForCompoundCases(conf_compound, 3);
         compound_causes = data.compound_causes;
         correct_answers = [4 7 9;3 8 0;3 6 0;3 7 0;3 4 0;3 9 0];
         num_correct_answers = [3 2 2 2 2 2];
@@ -352,7 +397,9 @@ function [moc fscore] = reproduce_cui
         for i=1:6 % # fo compound cases
           fscore_total = 0;
           for j=1:num_correct_answers(i)
-            fscore_total = fscore_total + mean(fscore_compound{correct_answers(j,i), i});
+            fscore = fscore_compound{correct_answers(i,j), i};
+            fscore(isnan(fscore))= 0;
+            fscore_total = fscore_total + mean(fscore);
           end
           fscores(i) = fscore_total / num_correct_answers(i);
         end
@@ -368,6 +415,8 @@ function [moc fscore] = reproduce_cui
         set(axes_exp5, 'FontSize', 18);
         legend(axes_exp5, 'Ratio of Correct Causes if Shown Top-3 Causes', 'Average F1-measure of Correct Causes');
         title(axes_exp5, 'Experiment 5 (Sec 8.7): Explaining Compound Situations (Figure 10)');
+        set(fig_exp5, 'Position', [60 60 1024 768]);
+
       otherwise
         return;
       end
