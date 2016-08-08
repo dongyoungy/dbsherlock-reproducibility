@@ -4,15 +4,24 @@
 
 Please cite the following papers if you use any part of this dataset:
 
-@inproceedings{sigmod/YoonNM16,
-  author    = {Dong Young Yoon and
-               Ning Niu and
-               Barzan Mozafari},
-  title     = {DBSherlock: {A} Performance Diagnostic Tool for Transactional Databases},
-  booktitle = {Proceedings of the 2016 {ACM} {SIGMOD} International Conference on
-               Management of Data, San Francisco, USA, June 26 - July 1, 2016},
-  year      = {2016}
+@inproceedings{Yoon:2016:DPD:2882903.2915218,
+ author    = {Yoon, Dong Young and Niu, Ning and Mozafari, Barzan},
+ title     = {DBSherlock: {A} Performance Diagnostic Tool for Transactional Databases},
+ booktitle = {Proceedings of the 2016 International Conference on Management of Data},
+ series    = {SIGMOD '16},
+ year      = {2016},
+ isbn      = {978-1-4503-3531-7},
+ location  = {San Francisco, California, USA},
+ pages     = {1599--1614},
+ numpages  = {16},
+ url       = {http://doi.acm.org/10.1145/2882903.2915218},
+ doi       = {10.1145/2882903.2915218},
+ acmid     = {2915218},
+ publisher = {ACM},
+ address   = {New York, NY, USA},
+ keywords  = {OLTP, anomaly detection, performance diagnosis, transactions},
 }
+
 
 @article{DBLP:journals/pvldb/YoonMB15,
   author    = {Dong Young Yoon and

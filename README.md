@@ -1,1 +1,46 @@
-# dbsherlock-reproducibility
+================================================================================
+README for reproducibility submission of paper ID 940
+
+A) Source code info
+Repository: https://github.com/dongyoungy/dbsherlock-reproducibility
+Programming Language: MATLAB
+Additional Programming Language info: N/A
+Compiler Info: N/A
+Packages/Libraries Needed: MATLAB R2015b or higher
+
+B) Datasets info
+Repository: https://github.com/dongyoungy/dbsherlock-reproducibility/tree/master/datasets
+Data generators: N/A (datasets are provided in the repository)
+
+C) Hardware Info
+The reproducibility package has been tested with my mid 2014 Macbook Pro Retina with
+the following specification:
+C1) Processor: 2.5Ghz quad-core Intel Core i7 processor (Turbo Boost up to 3.7Ghz)
+C2) Caches: 1MB L2 cache, 6MB shared L3 cache
+C3) Memory: 16GB 1600Mhz DDR3L SDRAM
+C4) Secondary Storage: 512 GB PCEe-based flash storage
+C5) Network: N/A
+
+D) Experimentation Info
+D1) Dataset archives that were used to conduct experiments in the paper have been provided in the repository.
+Each dataset is packaged as .mat file in ./datasets directory. The directory has a separate README file,
+which explains the format of the datasets for people who want to explore and use them.
+D2) In order to run experiments, launch MATLAB and go to the root directory of the repository using the
+command window. Once you enter the command 'reproduce_cui' to run our script in the command window, You will
+see the following menu, where you can select an experiment that you want to reproduce from the paper:
+
+          << DBSherlock Experiments >>
+          1. Accuracy of Single Causal Models (Section 8.3)
+          2. DBSherlock Predicates versus PerfXplain (Section 8.4)
+          3. Effectiveness of Merged Causal Models (Section 8.5)
+          4. Effect of Incorporating Domain Knowledge (Section 8.6)
+          5. Explaining Compound Situations (Section 8.7)
+          6. Run all of the above (ETC: 4-5 hours)
+
+Select an experiment to reproduce (1-6 or other input to exit):
+
+You can simply choose the option '6' to reproduce all experiments. The estimated time of completion has been
+obtained by running it with my test machine (i.e., Mid 2014 Macbook Pro). Since it is mostly CPU-bound, you will
+probably get the result faster with modern desktop machines. Once it is done, it will plot the charts that are
+similar to figures in the paper automatically.
+================================================================================

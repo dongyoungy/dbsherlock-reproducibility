@@ -1,5 +1,4 @@
 function models = loadCausalModels_Combiner
-    % model_directory = '/Users/dyoon/Work/dbseer/dbseer_front_end/causal_models';
     model_directory = [pwd '/causal_models'];
 
     modelFiles = dir([model_directory '/*.mat']);
@@ -17,7 +16,7 @@ function models = loadCausalModels_Combiner
                 current_predicates = models{j}.predicates;
                 incoming_predicates = model.predicates;
                 newPredicateIndex = [];
-                
+
                 % check each predicate
                 for k=1:size(incoming_predicates,1)
                     idx = find(strcmp(current_predicates(:,1), incoming_predicates(k,1)));
@@ -37,12 +36,12 @@ function models = loadCausalModels_Combiner
                     %     models{j}.predicates(end+1,:) = incoming_predicates(k,:);
                     end
                 end
-                
+
                 isCombined = true;
                 models{j}.predicates = models{j}.predicates(newPredicateIndex, :);
             end
         end
-        
+
         if ~isCombined && ~isempty(model.predicates)
             models{end+1} = model;
         end

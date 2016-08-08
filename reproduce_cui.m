@@ -1,23 +1,23 @@
 function reproduce_cui
   warning('off', 'all');
   addpath './scripts'
-  experiment_prompt = 'Select an experiment to reproduce (1-5 or other input to exit): ';
-  dataset_prompt = 'Select an input dataset (1-3 or other input to return): ';
-  dataset_name = '';
+  experiment_prompt     = 'Select an experiment to reproduce (1-6 or other input to exit): ';
+  dataset_prompt        = 'Select an input dataset (1-3 or other input to return)        : ';
+  dataset_name          = '';
   compound_dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
-  dataset_tpcc_16w = 'dbsherlock_dataset_tpcc_16w.mat';
-  dataset_tpcc_500w = 'dbsherlock_dataset_tpcc_500w.mat';
-  dataset_tpce = 'dbsherlock_dataset_tpce_3000.mat';
+  dataset_tpcc_16w      = 'dbsherlock_dataset_tpcc_16w.mat';
+  dataset_tpcc_500w     = 'dbsherlock_dataset_tpcc_500w.mat';
+  dataset_tpce          = 'dbsherlock_dataset_tpce_3000.mat';
 
   while true
     % display experiment options
     fprintf('\n');
     fprintf('\t<< DBSherlock Experiments >>\n');
-    fprintf('\t1. Accuracy of Single Causal Models (Sec 8.3)\n');
-    fprintf('\t2. DBSherlock Predicates versus PerfXplain (Sec 8.4)\n');
-    fprintf('\t3. Effectiveness of Merged Causal Models (Sec 8.5)\n');
-    fprintf('\t4. Effect of Incorporating Domain Knowledge (Sec 8.6)\n');
-    fprintf('\t5. Explaining Compound Situations (Sec 8.7)\n');
+    fprintf('\t1. Accuracy of Single Causal Models (Section 8.3)\n');
+    fprintf('\t2. DBSherlock Predicates versus PerfXplain (Section 8.4)\n');
+    fprintf('\t3. Effectiveness of Merged Causal Models (Section 8.5)\n');
+    fprintf('\t4. Effect of Incorporating Domain Knowledge (Section 8.6)\n');
+    fprintf('\t5. Explaining Compound Situations (Section 8.7)\n');
     fprintf('\t6. Run all of the above (ETC: 4-5 hours)\n');
     fprintf('\n');
 
@@ -46,6 +46,11 @@ function reproduce_cui
       case 6
         dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
       otherwise
+        return;
+      end
+
+      if isOctave
+        fflush(stdout);
       end
 
       % if experiment_option == 5

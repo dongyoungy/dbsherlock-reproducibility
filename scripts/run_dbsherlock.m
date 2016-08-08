@@ -490,7 +490,7 @@ function [explanation causalModels predicates extra] = run_dbsherlock(dataset, a
 
   if createModel && size(sorted_predicates, 1) > 0
     model = setfield(model, 'cause', causeStr);
-    save(model_path, 'model')
+    save(model_path, 'model');
   end
 
   causalModels = loadCausalModels_Combiner;

@@ -17,35 +17,33 @@ DBSherlock:
   running TPC-E benchmark with scale factor of 3000.
 
 Please note that only 'dbsherlock_dataset_tpcc_16w.mat' contains datasets for
-compound situations. Also, 'dbsherlock_datase_tpcc_16w.mat' contains one extra
-test case called 'Database maintenance', which has been excluded in the paper
-due to the test case being hard to reproduce in different systems. The other two
-additional datasets do not contain the test case 'Database maintenance'.
-
-'dbsherlock_dataset_tpcc_16w.mat' contains seven fields:
+compound situations. 'dbsherlock_dataset_tpcc_16w.mat' contains seven fields:
 
   1. causes: a cell structure that contains the name of each performance anomaly
   (i.e., test case).
 
-  2. test_datasets: 11-by-11 cell structure, where each row represents different
+  2. compound_causes: similar to 'causes', a cell structure that contains the
+  name of each compound performance anomaly.
+
+  3. test_datasets: 10-by-11 cell structure, where each row represents different
   test cases and each column represents different duration or start times of the
   anomaly, ranging from 30 seconds to 80 seconds with increment of 5.
   For example, test_datasets{2,4} is a dataset with the anomaly 'I/O Saturation'
   with the anomaly duration of 45 seconds.
 
-  3. compound_datasets: 6-by-11 cell structure. It is similar to 'test_datasets'.
+  4. compound_datasets: 6-by-11 cell structure. It is similar to 'test_datasets'.
   Only difference is that each row represents different compound test cases.
 
-  4. normal_regions: this contains the normal region of each dataset in
+  5. normal_regions: this contains the normal region of each dataset in
   'test_datasets' with corresponding indices.
 
-  5. abnormal_regions: this contains the abnormal region of each dataset in
+  6. abnormal_regions: this contains the abnormal region of each dataset in
   'test_datasets' with corresponding indices.
 
-  6. normal_regions_compound: this contains the normal region of each dataset in
+  7. normal_regions_compound: this contains the normal region of each dataset in
   'compound_datasets' with corresponding indices.
 
-  7. abnormal_regions_compound: this contains the abnormal region of each dataset
+  8. abnormal_regions_compound: this contains the abnormal region of each dataset
   in 'compound_datasets' with corresponding indices.
 
 'dbsherlock_dataset_tpcc_500w.mat' and 'dbsherlock_dataset_tpce_3000.mat' have
