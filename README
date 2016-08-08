@@ -29,15 +29,15 @@ D2) In order to run experiments, launch MATLAB and go to the root directory of t
 command window. Once you enter the command 'reproduce_cui' to run our script in the command window, You will
 see the following menu, where you can select an experiment that you want to reproduce from the paper:
 
-          << DBSherlock Experiments >>
-          1. Accuracy of Single Causal Models (Section 8.3)
-          2. DBSherlock Predicates versus PerfXplain (Section 8.4)
-          3. Effectiveness of Merged Causal Models (Section 8.5)
-          4. Effect of Incorporating Domain Knowledge (Section 8.6)
-          5. Explaining Compound Situations (Section 8.7)
-          6. Run all of the above (ETC: 4-5 hours)
+                << DBSherlock Experiments >>
+                1. Accuracy of Single Causal Models (Section 8.3)
+                2. DBSherlock Predicates versus PerfXplain (Section 8.4)
+                3. Effectiveness of Merged Causal Models (Section 8.5)
+                4. Effect of Incorporating Domain Knowledge (Section 8.6)
+                5. Explaining Compound Situations (Section 8.7)
+                6. Run all of the above (ETC: 4-5 hours)
 
-Select an experiment to reproduce (1-6 or other input to exit):
+      Select an experiment to reproduce (1-6 or other input to exit):
 
 You can simply choose the option '6' to reproduce all experiments. The estimated time of completion has been
 obtained by running it with my test machine (i.e., Mid 2014 Macbook Pro). Since it is mostly CPU-bound, you will
