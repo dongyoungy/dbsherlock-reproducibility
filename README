@@ -1,4 +1,4 @@
-================================================================================
+==========================================================================================
 README for reproducibility submission of paper ID 940
 
 A) Source code info
@@ -49,4 +49,5 @@ You can simply choose the option '6' to reproduce all experiments. The estimated
 completion has been obtained by running it with my test machine. Since it is mostly
 CPU-bound, you will probably get the result faster with modern desktop machines. Once it
 is done, it will plot the charts that are similar to figures in the paper automatically.
-================================================================================
+
+==========================================================================================
