@@ -44,15 +44,14 @@ function reproduce_cui
         fprintf('Using TPC-C (scale factor: 16 warehouses) for the experiment...\n');
         dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
       case 6
+        fprintf('Running all experiments...\n');
         dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
       otherwise
         return;
       end
 
-      if isOctave
-        fflush(stdout);
-      end
-
+      % Removing options to choose a dataset specifically for simplicity.
+      %
       % if experiment_option == 5
       %   fprintf('Using TPC-C (scale factor: 16 warehouses) for the experiment...\n');
       %   dataset_name = 'dbsherlock_dataset_tpcc_16w.mat';
@@ -227,7 +226,7 @@ function reproduce_cui
         correct_answers = [4 7 9;3 8 0;3 6 0;3 7 0;3 4 0;3 9 0];
         num_correct_answers = [3 2 2 2 2 2];
         fscores = [];
-        for i=1:6 % # fo compound cases
+        for i=1:6 % # of compound cases
           fscore_total = 0;
           for j=1:num_correct_answers(i)
             fscore = fscore_compound{correct_answers(i,j), i};
@@ -399,7 +398,7 @@ function reproduce_cui
         correct_answers = [4 7 9;3 8 0;3 6 0;3 7 0;3 4 0;3 9 0];
         num_correct_answers = [3 2 2 2 2 2];
         fscores = [];
-        for i=1:6 % # fo compound cases
+        for i=1:6 % # of compound cases
           fscore_total = 0;
           for j=1:num_correct_answers(i)
             fscore = fscore_compound{correct_answers(i,j), i};
