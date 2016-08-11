@@ -21,7 +21,7 @@ the following specification:
 C1) Processor: 2.5Ghz quad-core Intel Core i7 processor (Turbo Boost up to 3.7Ghz)
 C2) Caches: 1MB L2 cache, 6MB shared L3 cache
 C3) Memory: 16GB 1600Mhz DDR3L SDRAM
-C4) Secondary Storage: 512 GB PCEe-based flash storage
+C4) Secondary Storage: 512 GB PCIe-based flash storage
 C5) Network: N/A
 
 D) Experimentation Info
