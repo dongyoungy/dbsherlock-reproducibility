@@ -29,7 +29,7 @@ D) Experimentation Info
 D1) Dataset archives that were used to conduct experiments in the paper have been
 provided in the repository. Each dataset is packaged as .mat file in ./datasets directory.
 The directory has a separate README file, which explains the format of the datasets for
-people who want to explore and use them.
+people who want to explore and use datasets only.
 D2) In order to run experiments, launch MATLAB and go to the root directory of the
 repository using the command window. Once you enter the command 'reproduce_cui' to run our
 script in the command window, You will see the following menu, where you can select an
@@ -48,6 +48,7 @@ experiment that you want to reproduce from the paper:
 You can simply choose the option '6' to reproduce all experiments. The estimated time of
 completion has been obtained by running it with my test machine. Since it is mostly
 CPU-bound, you will probably get the result faster with modern desktop machines. Once it
-is done, it will plot the charts that are similar to figures in the paper automatically.
+is done, it will plot the charts that replicate figures and tables in the experiment
+section of the paper automatically (except for the section '8.8 User Study').
 
 ==========================================================================================

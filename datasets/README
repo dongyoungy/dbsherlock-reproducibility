@@ -1,3 +1,6 @@
+For details on the hardware setup used to collect these datasets, please refer
+to the section '8.1 Experiment Setup' of the DBSherlock paper.
+
 There are three datasets that have been used to conduct experiments with
 DBSherlock:
 
@@ -28,7 +31,7 @@ compound situations. 'dbsherlock_dataset_tpcc_16w.mat' contains seven fields:
   3. test_datasets: 10-by-11 cell structure, where each row represents different
   test cases and each column represents different duration or start times of the
   anomaly, ranging from 30 seconds to 80 seconds with increment of 5.
-  For example, test_datasets{2,4} is a dataset with the anomaly 'I/O Saturation'
+  For example, test_datasets{2,4} is a dataset with the anomaly 'Poor Physical Design'
   with the anomaly duration of 45 seconds.
 
   4. compound_datasets: 6-by-11 cell structure. It is similar to 'test_datasets'.
